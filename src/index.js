@@ -42,6 +42,9 @@ app.get("/products", (req, res) => {
 app.get("/products/:id", (req, res) => {
   const id = Number(req.params.id);
   const product = products.find((product) => product.id == id);
+  if (!product) {
+    return res.status(404).send({ error: "Product not found" });
+  }
   res.send({ product: product });
 });
 
